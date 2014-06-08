@@ -1,0 +1,18 @@
+name: osmonitb-charm
+summary: Bare bones GSM core network based on Osmocom OpenBSC
+maintainer: Alexey Shamrin <shamrin@gmail.com>
+description: |
+  Basic GSM core network implementation (BSC, MSC, VLR, HLR).
+  Based Osmocom OpenBSC in in network-in-the box NITB mode.
+categories:
+  - misc
+subordinate: false
+provides:
+  provides-relation:
+    interface: interface-name
+requires:
+  requires-relation:
+    interface: interface-name
+peers:
+  peer-relation:
+    interface: interface-name
