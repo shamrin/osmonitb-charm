@@ -1,9 +1,9 @@
-name: osmonitb-charm
+name: osmonitb
 summary: Bare bones GSM core network based on Osmocom OpenBSC
 maintainer: Alexey Shamrin <shamrin@gmail.com>
 description: |
-  Basic GSM core network implementation (BSC, MSC, VLR, HLR).
-  Based Osmocom OpenBSC in in network-in-the box NITB mode.
+  OsmoNITB is a basic GSM core network implementation (BSC, MSC, HLR, VLR).
+  Based on Osmocom OpenBSC in NITB (network-in-the-box) mode.
 categories:
   - misc
 subordinate: false

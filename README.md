@@ -1,5 +1,23 @@
 # Overview
 
+OsmoNITB is a bare bones GSM core network implementation. While not as powerful as a complete GSM core network, it's enough to function as a stand-alone BSC, MSC, HLR and VLR.
+
+Based on Osmocom OpenBSC in NITB (network-in-the-box) mode.
+
+This charm will deploy OsmoNITB and connect it to BTS on one hand, and to VoIP server on the other hand.
+
+# Installation
+
+To deploy this charm you will need at a minimum: a cloud environment, working Juju installation and a successful bootstrap. Once bootstrapped, deploy the MySQL charm and then this Vanilla charm:
+    juju deploy mysql
+    juju deploy osmonitb
+Add a relation between the two of them:
+    juju add-relation fairwaves-bts osmonitb
+And finally expose the Vanilla service:
+    juju expose osmonitb
+
+# Overview
+
 Describe the intended usage of this charm and anything unique about how this charm relates to others here. 
 
 This README will be displayed in the Charm Store, it should be either Markdown or RST. Ideal READMEs include instructions on how to use the charm, expected usage, and charm features that your audience might be interested in. For an example of a well written README check out Hadoop: http://jujucharms.com/charms/precise/hadoop
