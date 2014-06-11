@@ -15,12 +15,15 @@ To deploy this charm you will need at a minimum: a cloud environment, working Ju
 
     juju deploy osmonitb
 
-
 TODO: relations
 
 And finally expose the OsmoNITB service:
 
     juju expose osmonitb
+
+# Known Limitations and Issues
+
+Nothing works.
 
 # Contact Information
 
