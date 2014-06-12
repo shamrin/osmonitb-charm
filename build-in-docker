@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -e
+
+if test -z "$IN_DOCKER"; then
+    echo This script is meant to be run within the fairwaves/osomcom Docker container. Run 'make env' to build it.
+    exit 1
+fi
+
+# libdbi with sqlite3 driver: because OpenBSC now fails with system libdbi
+cd /root && git clone http://git.code.sf.net/p/libdbi/libdbi \
+    && cd libdbi \
+    && git checkout libdbi-0.8.3 \
+    && autoreconf -i \
+    && ./configure --disable-docs && make && make install \
+    && ldconfig \
+    && cd ..
+cd /root && git clone http://git.code.sf.net/p/libdbi-drivers/libdbi-drivers \
+    && cd libdbi-drivers \
+    && git checkout libdbi-drivers-0.8.3.1 \
+    && autoreconf -i \
+    && ./configure --with-sqlite3 --disable-docs --with-sqlite3-dir=/usr/lib/x86_64-linux-gnu/ \
+    && make && make install \
+    && ldconfig \
+    && cd ..
+
+# libosmocore
+cd /root && git clone git://git.osmocom.org/libosmocore.git \
+    && cd libosmocore \
+    && autoreconf -i \
+    && ./configure && make && make install \
+    && ldconfig \
+    && cd ..
+
+# libosmo-abis
+cd /root && git clone -b fairwaves/master git://git.osmocom.org/libosmo-abis.git \
+    && cd libosmo-abis \
+    && autoreconf -i \
+    && ./configure && make && make install \
+    && ldconfig \
+    && cd ..
+
+mkdir /tmp/installdir
+
+# OpenBSC
+cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
+    && cd openbsc/openbsc/ \
+    && autoreconf -i \
+    && ./configure && make && make install DESTDIR=/tmp/installdir \
+    && cd ../..
+
+# build deb
+run fpm -s dir -t deb -v 0.1 -C /tmp/installdir -p osmonitb-VERSION-ARCH.deb \
+    usr/bin
