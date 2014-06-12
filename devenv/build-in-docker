@@ -3,7 +3,7 @@
 set -e
 
 if test -z "$IN_DOCKER"; then
-    echo This script is meant to be run within the fairwaves/osomcom Docker container. Run 'make env' to build it.
+    echo "This script is meant to be run within the fairwaves/osomcom Docker container. Run 'make env' to build it."
     exit 1
 fi
 
