@@ -11,3 +11,5 @@ run DEBIAN_FRONTEND=noninteractive apt-get -q -y install curl gcc make git autoc
     && gem install fpm
 
 env IN_DOCKER 1
+
+add build-in-docker /usr/local/bin/
