@@ -50,5 +50,5 @@ cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
     && cd ../..
 
 # build deb
-run fpm -s dir -t deb -v 0.1 -C /tmp/installdir -p osmonitb-VERSION-ARCH.deb \
+fpm -s dir -t deb -v 0.1 -C /tmp/installdir -p osmonitb-VERSION-ARCH.deb \
     usr/bin
