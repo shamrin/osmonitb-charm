@@ -14,3 +14,4 @@ env IN_DOCKER 1
 
 add build-in-docker /usr/local/bin/
 add after-install /root/
+add openbsc.cfg /root/
