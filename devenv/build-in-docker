@@ -51,7 +51,7 @@ cd /root && git clone -b fairwaves/master git://git.osmocom.org/libosmo-abis.git
 cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
     && cd openbsc/openbsc/ \
     && autoreconf -i \
-    && ./configure && make && make install DESTDIR=$INSTDIR \
+    && ./configure && make && make check && make install DESTDIR=$INSTDIR \
     && cd ../..
 
 # build deb
