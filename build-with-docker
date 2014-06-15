@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+docker run -p 8888:8888 shamrin/osmocom build-in-docker
+while true; do
+  if curl -sO 192.168.59.103:8888/osmonitb-0.1-amd64.deb; then
+    break
+  else
+    sleep 0.5
+  fi
+done
+echo .deb package downloaded, press Ctrl-C to finish
+docker attach $(docker ps -lq)

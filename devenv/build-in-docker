@@ -50,5 +50,6 @@ cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
     && cd ../..
 
 # build deb
-fpm -s dir -t deb -v 0.1 -C /tmp/installdir -p osmonitb-VERSION-ARCH.deb \
-    usr/bin
+cd /root && fpm -s dir -t deb -v 0.1 -n osmonitb -C /tmp/installdir -p osmonitb-VERSION-ARCH.deb usr/local/bin
+
+cd /root && python -m SimpleHTTPServer 8888
