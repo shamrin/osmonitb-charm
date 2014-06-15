@@ -1,5 +1,7 @@
 env:
 	docker build --rm -t shamrin/osmocom devenv
 
-dockerbuild:
+dockerbuild: env
 	./build-with-docker
+
+.PHONY: env dockerbuild
