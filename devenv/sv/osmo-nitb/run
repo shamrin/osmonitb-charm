@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec chrt 10 osmo-nitb -c /etc/osmocom/openbsc.cfg -l /etc/osmocom/hlr.sqlite3 -P -m -C --debug=DRLL:DCC:DMM:DRR:DRSL:DNM

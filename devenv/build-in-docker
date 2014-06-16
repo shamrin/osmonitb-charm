@@ -58,8 +58,13 @@ cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
 mkdir -p $INSTDIR/etc/osmocom
 cp /root/openbsc.cfg $INSTDIR/etc/osmocom
 
+# runit scripts
+sudo cp -r /root/sv/* /etc/sv
+sudo ln -s /etc/sv/lcr /etc/service/lcr
+sudo ln -s /etc/sv/osmo-nitb /etc/service/osmo-nitb
+
 # build deb
-cd /root && fpm -s dir -t deb -v 0.1 -n osmonitb -C $INSTDIR -p osmonitb-VERSION-ARCH.deb --after-install /root/after-install usr/local etc
+cd /root && fpm -s dir -t deb -v 0.1 -n osmonitb -C $INSTDIR -d runit -p osmonitb-VERSION-ARCH.deb --after-install /root/after-install usr/local etc
 
 # run web server for .deb downloading, see `build-with-docker` for details
 cd /root && python -m SimpleHTTPServer 8888

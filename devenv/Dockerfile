@@ -12,6 +12,9 @@ run DEBIAN_FRONTEND=noninteractive apt-get -q -y install curl gcc make git autoc
 
 env IN_DOCKER 1
 
+# TODO move this (and script) to a separate Dockerfile (in another directory)
 add build-in-docker /usr/local/bin/
 add after-install /root/
 add openbsc.cfg /root/
+add osmo-nitb.conf /root/
+add sv /root/
