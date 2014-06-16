@@ -61,6 +61,5 @@ cp /root/openbsc.cfg $INSTDIR/etc/osmocom
 # build deb
 cd /root && fpm -s dir -t deb -v 0.1 -n osmonitb -C $INSTDIR -p osmonitb-VERSION-ARCH.deb --after-install /root/after-install usr/local etc
 
-# run web server for .deb downloading, because `docker cp` didn't work:
-# https://github.com/boot2docker/boot2docker/issues/398
+# run web server for .deb downloading, see `build-with-docker` for details
 cd /root && python -m SimpleHTTPServer 8888

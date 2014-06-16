@@ -1,7 +1,17 @@
 #!/bin/bash
 set -e
+
+# Ordinary we would run the container and get .deb file with `docker cp`,
+# but it doesn't work: https://github.com/boot2docker/boot2docker/issues/398.
+# The workaround is to run container in the background and download via HTTP.
+
+# run container in the background
 ID=$(docker run -d -p 8888:8888 shamrin/osmocom build-in-docker)
+
+# make terminal output visible (in the background)
 docker attach $ID &
+
+# continuously try to download .deb via HTTP (`build-in-docker` runs the server)
 while true; do
   if curl -sO 192.168.59.103:8888/osmonitb-0.1-amd64.deb; then
     break
@@ -10,4 +20,6 @@ while true; do
   fi
 done
 echo .deb package downloaded
+
+# we are done, kill the (background) container
 docker kill $ID
