@@ -20,7 +20,7 @@ while true; do
   if curl -s $IP:$PORT; then
     filename=$(curl -s $IP:$PORT/osmonitb.deb)
     curl -sO $IP:$PORT/$filename
-    ln -s $filename osmonitb.deb
+    ln -fs $filename osmonitb.deb
     break
   else
     sleep 0.5

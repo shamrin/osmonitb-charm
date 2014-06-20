@@ -71,7 +71,7 @@ ln -s /etc/sv/lcr ./etc/service/lcr
 #ln -s /usr/bin/sv /etc/init.d/lcr
 
 # build deb
-cd /root && fpm -s dir -t deb -v v$(date -u '+%Y-%m-%d') -n osmonitb -C $INSTDIR -d runit -p osmonitb-VERSION-ARCH.deb --after-install /root/after-install usr/local etc && ls osmonitb-*.deb > osmonitb.deb
+cd /root && fpm -s dir -t deb -v $(date -u '+%Y.%m.%d') -n osmonitb -C $INSTDIR -d runit -p osmonitb-VERSION-ARCH.deb --after-install /root/after-install usr/local etc && ls osmonitb-*.deb > osmonitb.deb
 
 # run web server for .deb downloading, see `build-with-docker` for details
 cd /root && python -m SimpleHTTPServer $HTTP_PORT
