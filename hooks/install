@@ -5,4 +5,16 @@
 # failing to account for a debconf question on a dependency, or trying to pull
 # from github without installing git first.
 
-apt-get install -y osmonitb-charm
+set -e
+
+apt-get install -y runit
+
+cd $(mktemp -d -t osmonitb)
+
+repolink="https://github.com/shamrin/osmonitb-charm"
+
+# get latest release tag and download its .deb package
+latest=$(curl -s -o /dev/null -I -w "%{redirect_url}" $repolink/releases/latest | awk -F/ '{print $NF}')
+curl -L -O -s $repolink/releases/download/$latest/osmonitb-$latest-amd64.deb
+
+dpkg -i osmonitb-$latest-amd64.deb
