@@ -3,4 +3,4 @@
 # Note that currently this is run directly after install
 # i.e. 'service apache2 start'
 
-sv osmo-nitb start
+sv start osmo-nitb
