@@ -5,15 +5,22 @@ set -e
 # but it doesn't work: https://github.com/boot2docker/boot2docker/issues/398.
 # The workaround is to run container in the background and download via HTTP.
 
+PORT=8888
+
 # run container in the background
-ID=$(docker run -d -p 8888:8888 shamrin/osmocom build-in-docker)
+ID=$(docker run -d -p $PORT:$PORT -e HTTP_PORT=$PORT shamrin/osmocom build-in-docker)
 
 # make terminal output visible (in the background)
 docker attach $ID &
 
+IP=192.168.59.103
+
 # continuously try to download .deb via HTTP (`build-in-docker` runs the server)
 while true; do
-  if curl -sO 192.168.59.103:8888/osmonitb-0.1-amd64.deb; then
+  if curl -s $IP:$PORT; then
+    filename=$(curl -s $IP:$PORT/osmonitb.deb)
+    curl -sO $IP:$PORT/$filename
+    ln -s $filename osmonitb.deb
     break
   else
     sleep 0.5
