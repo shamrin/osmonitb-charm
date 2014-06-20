@@ -16,4 +16,11 @@ env IN_DOCKER 1
 add build-in-docker /usr/local/bin/
 add after-install /root/
 add openbsc.cfg /root/
-add sv /root/
+
+# because `add sv /root` doesn't work for me :(
+run mkdir -p /root/sv/lcr/log
+run mkdir -p /root/sv/osmo-nitb/log
+add sv/lcr/run /root/sv/lcr/
+add sv/lcr/log/run /root/sv/lcr/log/
+add sv/osmo-nitb/run /root/sv/osmo-nitb/
+add sv/osmo-nitb/log/run /root/sv/osmo-nitb/log/

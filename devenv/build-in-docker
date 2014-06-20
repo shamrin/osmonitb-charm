@@ -59,9 +59,12 @@ mkdir -p $INSTDIR/etc/osmocom
 cp /root/openbsc.cfg $INSTDIR/etc/osmocom
 
 # runit scripts
-cp -r /root/sv/* /etc/sv
-ln -s /etc/sv/lcr /etc/service/lcr
-ln -s /etc/sv/osmo-nitb /etc/service/osmo-nitb
+cd $INSTDIR
+mkdir -p ./etc/sv ./etc/service
+echo cp -r /root/sv/* ./etc/sv
+cp -r /root/sv/* ./etc/sv
+ln -s /etc/sv/osmo-nitb ./etc/service/osmo-nitb
+ln -s /etc/sv/lcr ./etc/service/lcr
 
 # lsb init script compatibility
 #ln -s /usr/bin/sv /etc/init.d/osmo-nitb
