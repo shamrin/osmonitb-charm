@@ -9,7 +9,7 @@ set -e
 
 apt-get install -y runit
 
-cd $(mktemp -d -t osmonitb)
+dir=$(mktemp -d)
 
 repolink="https://github.com/shamrin/osmonitb-charm"
 
