@@ -7,14 +7,16 @@
 
 set -e
 
-apt-get install -y runit
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get install -y runit openvpn
 
 dir=$(mktemp -d)
+cd $dir
 
 repolink="https://github.com/shamrin/osmonitb-charm"
 
 # get latest release tag and download its .deb package
 latest=$(curl -s -o /dev/null -I -w "%{redirect_url}" $repolink/releases/latest | awk -F/ '{print $NF}')
 curl -L -O -s $repolink/releases/download/$latest/osmonitb-$latest-amd64.deb
-
 dpkg -i osmonitb-$latest-amd64.deb
