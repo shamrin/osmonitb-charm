@@ -3,6 +3,8 @@
 
 import subprocess
 import os.path
+import struct
+import socket
 
 PATCH_TEMPLATE = '/root/hardcode-external-ip.patch.template'
 IP = '172.31.1.16'
