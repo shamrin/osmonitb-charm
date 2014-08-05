@@ -49,6 +49,7 @@ cd /root && git clone -b fairwaves/master git://git.osmocom.org/libosmo-abis.git
 
 # OpenBSC
 cd /root && git clone -b fairwaves/master git://git.osmocom.org/openbsc.git \
+    && /root/patch-openbsc-external-ip \
     && cd openbsc/openbsc/ \
     && autoreconf -i \
     && ./configure && make && make check && make install DESTDIR=$INSTDIR \

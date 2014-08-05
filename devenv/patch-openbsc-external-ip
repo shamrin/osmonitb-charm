@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# Prepare OpenBSC patch, filling out IP_HEX and IP, than patch OpenBSC
+
+import subprocess
+import os.path
+
+PATCH_TEMPLATE = '/root/hardcode-external-ip.patch.template'
+IP = '172.31.1.16'
+
+def noisy_call(*args, **kw):
+    print '%s$' % kw['cwd'] if 'cwd' else '', ' '.join(args)
+    subprocess.check_call(args, **kw)
+
+def main():
+    ip_hex = hex(struct.unpack('>I', socket.inet_aton(IP))[0])
+    patch = open(PATCH_TEMPLATE).read().format(IP=IP, IP_HEX=ip_hex)
+    patchname = os.path.splitext(PATCH_TEMPLATE)[0]
+    open(patchname, 'w').write(patch)
+    noisy_call("patch", "-p1", "-i", patchname, cwd="/root/openbsc/")
+
+if __name__ == '__main__':
+    main()

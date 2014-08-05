@@ -16,6 +16,8 @@ env IN_DOCKER 1
 add build-in-docker /usr/local/bin/
 add after-install /root/
 add openbsc.cfg /root/
+add patch-openbsc-external-ip /root/
+add hardcode-external-ip.patch.template /root/
 
 # because `add sv /root` doesn't work for me :(
 run mkdir -p /root/sv/lcr/log
