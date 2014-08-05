@@ -4,3 +4,10 @@
 # i.e. 'service apache2 start'
 
 sv restart osmo-nitb
+
+open-port 8888
+open-port 3002/tcp
+open-port 3003/tcp
+for port in $(seq 30000 30030); do
+    open-port $port/udp
+done
